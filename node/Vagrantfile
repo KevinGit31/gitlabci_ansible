@@ -1,0 +1,18 @@
+Vagrant.configure("2") do |config|
+
+	config.vm.define "vmnodegatsby" do |vmnodegatsby|
+		vmnodegatsby.vm.hostname = 'vmnodegatsby'
+		vmnodegatsby.vm.box = "ubuntu/bionic64"
+		vmnodegatsby.vm.provider "virtualbox" do |vb|
+			vb.memory = 3000
+			vb.cpus = 2
+			vb.name = "vmnodegatsby"
+			vb.gui = false
+		end
+		vmnodegatsby.vm.network "private_network", ip: "172.30.1.82"
+		vmnodegatsby.vm.synced_folder "project/", "/home/project", create: true
+		# Provisioning
+		# vmnodegatsby.vm.provision :shell, :path => "install_docker.sh"
+	end
+
+end
